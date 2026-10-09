@@ -25,7 +25,7 @@
    reveals that follow reading order, feedback on every interactive element.
    ===================================================================== */
 :root {
-  --blue:#002FAF; --blue-2:#0C62FB; --night:#0A0F24; --deep:#00114A;
+  --blue:#002FAF; --primary:#0057FF; --blue-2:#0057FF; --night:#0A0F24; --deep:#00114A;
   --paper:#FFFFFF; --mist:#F2F4FA; --ink:#1F2A55; --ink-2:#4A5680; --rule:#CDD3E4; --rule-dark:rgba(255,255,255,.18);
   --k1:#E4FE6D; --k2:#FF4D5F; --k3:#1BE1F2; --k4:#C7B9FF;
   --display:'Archivo', 'Avenir Next LT Pro', 'Nunito Sans', Arial, sans-serif;
@@ -53,7 +53,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .on-dark { color:#FFFFFF; }
 
 /* ---------- Shared type ---------- */
-.h2 { font-size:var(--fs-h2); line-height:.98; letter-spacing:-.03em; font-stretch:100%; color:var(--blue); text-wrap:balance; }
+.h2 { font-size:var(--fs-h2); line-height:.98; letter-spacing:-.03em; font-stretch:100%; color:var(--primary); text-wrap:balance; }
 .on-dark .h2 { color:#FFFFFF; }
 .lead { font-size:var(--fs-lead); line-height:1.42; max-width:44ch; text-wrap:pretty; }
 .label { font-size:var(--fs-label); font-weight:700; letter-spacing:.01em; color:var(--ink-2); }
@@ -142,8 +142,8 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
    ===================================================================== */
 .statement { position:relative; height:240vh; background:var(--paper); }
 .statement-pin { position:sticky; top:0; height:100vh; height:100svh; display:flex; align-items:center; overflow:hidden; }
-.statement-text { position:relative; z-index:1; font-size:clamp(48px, 9.2vw, 168px); line-height:.9; letter-spacing:-.045em; font-stretch:112%; font-weight:800; color:var(--blue); max-width:12ch; }
-.statement-text .w { color:var(--blue); }
+.statement-text { position:relative; z-index:1; font-size:clamp(48px, 9.2vw, 168px); line-height:.9; letter-spacing:-.045em; font-stretch:112%; font-weight:800; color:var(--primary); max-width:12ch; }
+.statement-text .w { color:var(--primary); }
 .motion .statement-text .w { opacity:var(--o, .1); transition:opacity .25s linear; }
 
 .statement-pin { align-items:flex-end; padding-bottom:calc(clamp(64px, 14vh, 150px) + var(--telar-h)); }
@@ -157,12 +157,12 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .reframe-grid { display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); column-gap:var(--gap); align-items:start; }
 .reframe-head { grid-column:1 / span 5; position:sticky; top:120px; }
 .reframe-head .h2 { margin-bottom:28px; }
-.reframe-rows { grid-column:7 / -1; border-top:2px solid var(--blue); }
+.reframe-rows { grid-column:7 / -1; border-top:2px solid var(--primary); }
 .rf-row { display:grid; grid-template-columns:minmax(0, 1fr) 72px minmax(0, 1.25fr); grid-template-rows:auto auto; column-gap:20px; row-gap:10px; align-items:center; padding:34px 0; border-bottom:1px solid var(--rule); }
 .rf-row > .label:first-child { grid-column:1; } .rf-row > .label.u { grid-column:3; color:var(--blue-2); }
 .rf-known { font-family:var(--display); font-size:clamp(20px, 1.6vw, 26px); font-weight:500; line-height:1.15; color:var(--ink-2); }
 .rf-link { color:var(--blue-2); grid-column:2; }
-.rf-unlock { font-family:var(--display); font-size:clamp(24px, 2.2vw, 36px); font-weight:800; line-height:1.05; letter-spacing:-.02em; color:var(--blue); }
+.rf-unlock { font-family:var(--display); font-size:clamp(24px, 2.2vw, 36px); font-weight:800; line-height:1.05; letter-spacing:-.02em; color:var(--primary); }
 @media (max-width:1000px) { .reframe-head { grid-column:1 / -1; position:static; margin-bottom:48px; } .reframe-rows { grid-column:1 / -1; } }
 @media (max-width:560px) { .rf-row { grid-template-columns:1fr; grid-template-rows:none; row-gap:8px; } .rf-row > * { grid-column:1 !important; } .rf-link { width:48px; margin:10px 0 12px; } .rf-row > .label.u { order:4; } .rf-row .rf-unlock { order:5; } }
 
@@ -183,13 +183,18 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .u-row { position:relative; padding:clamp(26px, 3vw, 44px) 0; border-top:1px solid var(--rule-dark); isolation:isolate; }
 /* hover/focus: the key colour sweeps across the row */
 .u-row::before { content:""; position:absolute; inset:0 calc(-1 * var(--pad)); z-index:-1; background:var(--kc); opacity:.08;
-  transform:scaleX(0); transform-origin:left center; transition:transform .7s var(--ease); }
+  transform:scaleX(0); transform-origin:left center; transition:transform 1.6s cubic-bezier(.22,1,.36,1); }
 .u-row:hover::before, .u-row:focus-within::before { transform:scaleX(1); }
+.u-row { cursor:pointer; }
+.u-name::after { content:""; position:absolute; inset:0; z-index:1; }
+.u-name:focus-visible { outline:none; }
+.u-row:focus-within { outline:3px solid var(--k1); outline-offset:4px; }
+.u-link, .u-possible { transition:transform 1.1s cubic-bezier(.22,1,.36,1); }
+.u-row:hover .u-possible, .u-row:focus-within .u-possible { transform:translateX(10px); }
 .u-name { display:inline-flex; align-items:center; gap:18px; text-decoration:none; font-family:var(--display); font-size:clamp(28px, 3.2vw, 52px); font-weight:800; font-stretch:108%; letter-spacing:-.03em; line-height:1; color:#FFFFFF; }
 .u-name b { font-size:.42em; font-weight:700; font-stretch:100%; color:var(--kc); letter-spacing:0; }
-.u-name .dot { width:.32em; height:.32em; transition:transform .5s var(--ease); }
+.u-name .dot { width:.32em; height:.32em; transition:transform 1.1s cubic-bezier(.22,1,.36,1); }
 .u-row:hover .u-name .dot, .u-name:focus-visible .dot { transform:scale(1.9); }
-.u-name:hover, .u-name:focus-visible { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:8px; text-decoration-color:var(--kc); }
 .u-situation { color:rgba(255,255,255,.72); font-size:clamp(16px, 1.2vw, 19px); line-height:1.45; }
 .u-link { color:var(--kc); }
 .u-possible { font-size:clamp(17px, 1.35vw, 21px); font-weight:800; line-height:1.35; color:#FFFFFF; }
@@ -206,7 +211,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .split { display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 7fr); background:var(--paper); }
 .split.flip { grid-template-columns:minmax(0, 7fr) minmax(0, 5fr); }
 .split.flip .panel { order:2; }
-.panel { position:relative; overflow:hidden; background:var(--blue); color:#FFFFFF; padding:clamp(64px, 8vw, 120px) var(--pad); display:flex; flex-direction:column; gap:18px; min-height:min(100vh, 860px); isolation:isolate; }
+.panel { position:relative; overflow:hidden; background:var(--primary); color:#FFFFFF; padding:clamp(64px, 8vw, 120px) var(--pad); display:flex; flex-direction:column; gap:18px; min-height:min(100vh, 860px); isolation:isolate; }
 /* Element 3: the unlock number, oversized and cropped by the panel */
 .panel-num { position:absolute; z-index:-1; right:-.06em; top:31%; font-family:var(--display); font-size:clamp(180px, 23vw, 360px); font-weight:900; font-stretch:62%; line-height:.8; letter-spacing:-.05em;
   color:transparent; -webkit-text-stroke:2px var(--kc); opacity:.9; pointer-events:none; }
@@ -221,10 +226,9 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .split .content > * { max-width:820px; }
 .split .eyebrow { margin-bottom:22px; }
 .statement-p { font-family:var(--display); font-size:clamp(22px, 2vw, 32px); font-weight:500; line-height:1.28; letter-spacing:-.01em; color:var(--blue); text-wrap:pretty; }
-.points { margin-top:clamp(36px, 4vw, 56px); border-top:2px solid var(--blue); }
+.points { margin-top:clamp(36px, 4vw, 56px); border-top:2px solid var(--primary); }
 .point { display:grid; grid-template-columns:minmax(150px, 1fr) 2fr; column-gap:28px; row-gap:6px; padding:24px 0; border-bottom:1px solid var(--rule); transition:padding .45s var(--ease); }
-.point:hover { padding-left:12px; }
-.point h3 { font-size:var(--fs-h3); font-weight:700; line-height:1.15; letter-spacing:-.01em; color:var(--blue); }
+.point h3 { font-size:var(--fs-h3); font-weight:700; line-height:1.15; letter-spacing:-.01em; color:var(--primary); }
 .point p { line-height:1.5; }
 @media (max-width:960px) {
   .split, .split.flip { grid-template-columns:1fr; }
@@ -247,7 +251,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .mx-labels .label, .mx-cell { padding:26px 0; border-top:1px solid var(--rule); }
 .mx-labels .label { padding-top:30px; }
 .mx-head { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:22px; border-bottom:4px solid var(--kc); }
-.mx-head h3 { font-size:clamp(30px, 3.2vw, 52px); font-stretch:108%; letter-spacing:-.03em; line-height:1; color:var(--blue); }
+.mx-head h3 { font-size:clamp(30px, 3.2vw, 52px); font-stretch:108%; letter-spacing:-.03em; line-height:1; color:var(--primary); }
 .mx-tag { display:inline-flex; align-items:center; gap:10px; font-size:var(--fs-label); font-weight:800; color:var(--ink); white-space:nowrap; }
 .mx-tag .dot { width:12px; height:12px; }
 .mx-labels .mx-blank { border:0; }
@@ -265,7 +269,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 /* =====================================================================
    03 · WHY US: the partner hub
    ===================================================================== */
-.partner { padding:var(--sec) 0; background:var(--blue); }
+.partner { padding:var(--sec) 0; background:var(--primary); }
 .partner-grid { display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); column-gap:var(--gap); align-items:center; }
 .partner-copy { grid-column:1 / span 6; }
 .partner .h2 { margin-bottom:26px; }
@@ -278,13 +282,11 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .hub .net { stroke:rgba(255,255,255,.22); stroke-width:1.5; fill:none; }
 .hub .spoke { stroke:rgba(255,255,255,.55); stroke-width:2; transition:stroke .3s ease, stroke-width .3s ease; }
 .hub .ring { fill:none; stroke:rgba(255,255,255,.16); stroke-width:1.5; }
-.hub .core { fill:var(--blue-2); }
-.hub .core-title { fill:#FFFFFF; font-family:var(--display); font-size:34px; font-weight:800; text-anchor:middle; letter-spacing:-.5px; }
-.hub .core-sub { fill:rgba(255,255,255,.85); font-size:22px; font-weight:700; text-anchor:middle; }
+.hub .core { fill:var(--blue); }
+.hub .core-title { fill:#FFFFFF; font-family:var(--display); font-size:28px; font-weight:800; text-anchor:middle; letter-spacing:-.5px; }
+.hub .core-sub { fill:rgba(255,255,255,.85); font-size:19px; font-weight:700; text-anchor:middle; }
 .hub .node circle { fill:var(--k1); transition:transform .4s var(--ease); transform-box:fill-box; transform-origin:center; }
 .hub .node text { fill:#FFFFFF; font-family:var(--display); font-size:28px; font-weight:700; letter-spacing:-.3px; }
-.hub .node:hover circle { transform:scale(1.8); }
-.hub .node:hover text { fill:var(--k1); }
 .motion .hub .spoke { stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .8s var(--ease) calc(.3s + var(--n) * 90ms), stroke .3s ease; }
 .motion .hub.in .spoke { stroke-dashoffset:0; }
 .motion .hub .node { opacity:0; transition:opacity .5s ease calc(.7s + var(--n) * 90ms); } .motion .hub.in .node { opacity:1; }
@@ -295,8 +297,8 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 @media (max-width:600px) {
   .hub svg { display:none; }
   .hub-m { display:block; padding-top:28px; border-top:1px solid var(--rule-dark); }
-  .hub-m-core { display:flex; flex-direction:column; align-items:center; justify-content:center; width:168px; aspect-ratio:1; margin:0 auto 28px; border-radius:50%; background:var(--blue-2); text-align:center; }
-  .hub-m-core b { font-family:var(--display); font-size:22px; line-height:1.05; } .hub-m-core span { font-size:14px; font-weight:700; color:rgba(255,255,255,.85); }
+  .hub-m-core { display:flex; flex-direction:column; align-items:center; justify-content:center; width:196px; aspect-ratio:1; margin:0 auto 28px; padding:20px; border-radius:50%; background:var(--blue); text-align:center; }
+  .hub-m-core b { font-family:var(--display); font-size:19px; line-height:1.05; } .hub-m-core span { font-size:14px; font-weight:700; color:rgba(255,255,255,.85); }
   .hub-m ul { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; }
   .hub-m li { display:flex; align-items:center; gap:10px; padding:14px 0; border-bottom:1px solid var(--rule-dark); font-family:var(--display); font-weight:700; font-size:17px; }
   .hub-m li::before { content:""; width:9px; height:9px; border-radius:50%; background:var(--k1); flex:none; }
@@ -312,17 +314,15 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .proof-grid { display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); column-gap:var(--gap); row-gap:56px; }
 .proof-logos { grid-column:1 / span 7; }
 .proof-skills { grid-column:9 / -1; }
-.proof h3.label { padding-bottom:14px; border-bottom:2px solid var(--blue); font-family:var(--text); }
+.proof h3.label { padding-bottom:14px; border-bottom:2px solid var(--primary); font-family:var(--text); }
 .logos { display:grid; grid-template-columns:repeat(3, 1fr); }
 .logos li { height:clamp(104px, 10vw, 150px); display:flex; align-items:center; justify-content:center; padding:18px; border-bottom:1px solid var(--rule); border-right:1px solid var(--rule); }
 .logos li:nth-child(3n) { border-right:0; }
 .logos img { width:var(--w); height:auto; max-height:72px; filter:grayscale(1) contrast(1.1); opacity:.78; transition:filter .4s ease, opacity .4s ease, transform .5s var(--ease); }
 .logos img.tall { width:auto; height:clamp(50px, 4.6vw, 72px); }
-.logos li:hover img { filter:none; opacity:1; transform:scale(1.06); }
 .skills { display:flex; flex-wrap:wrap; gap:10px; padding-top:22px; }
 .skills li { padding:8px 16px; border:1.5px solid var(--blue); border-radius:999px; color:var(--blue); font-weight:700; font-size:clamp(14px, 1.05vw, 16px); transition:background-color .25s ease, color .25s ease; }
-.skills li:hover { background:var(--blue); color:#FFFFFF; }
-.testimonial { grid-column:2 / span 10; position:relative; margin-top:clamp(24px, 4vw, 56px); padding-top:36px; border-top:2px solid var(--blue); }
+.testimonial { grid-column:2 / span 10; position:relative; margin-top:clamp(24px, 4vw, 56px); padding-top:36px; border-top:2px solid var(--primary); }
 .testimonial p { text-indent:-.42em; font-family:var(--display); font-size:clamp(26px, 3vw, 48px); font-weight:500; line-height:1.15; letter-spacing:-.02em; color:var(--blue); text-wrap:pretty; }
 .testimonial cite { display:flex; align-items:center; gap:12px; margin-top:24px; font-style:normal; font-weight:700; color:var(--ink-2); }
 .testimonial cite::before { content:""; width:48px; height:2px; background:currentColor; }
@@ -345,7 +345,6 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .person figure { margin:0; }
 .person .ph { position:relative; aspect-ratio:4 / 5; overflow:hidden; background:var(--deep); }
 .person img { width:100%; height:100%; object-fit:cover; object-position:center 22%; filter:grayscale(1) contrast(1.06) brightness(.96); transform:scale(1.02); transition:filter .5s ease, transform .8s var(--ease); }
-.person:hover img, .person:focus-within img { filter:none; transform:scale(1.07); }
 .person figcaption { padding-top:14px; }
 .person h4 { font-family:var(--display); font-size:clamp(17px, 1.2vw, 20px); font-weight:700; letter-spacing:-.01em; line-height:1.15; color:#FFFFFF; }
 .person .role { display:block; margin-top:4px; font-size:14px; color:rgba(255,255,255,.82); }
@@ -353,7 +352,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 @media (max-width:1100px) { .region-head { grid-column:1 / -1; margin-bottom:28px; } .people { grid-column:1 / -1; } }
 @media (max-width:900px) { .team-head .h2, .team-head .lead { grid-column:1 / -1; } .team-head .lead { margin-top:20px; } .people { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
 @media (max-width:560px) { .people { grid-template-columns:repeat(2, minmax(0, 1fr)); row-gap:28px; } }
-@media (hover:none) { .person img { filter:none; } }
+
 
 /* =====================================================================
    04 · PLAYS
@@ -366,9 +365,14 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .plays-grid { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); column-gap:var(--gap); }
 .play { position:relative; display:grid; grid-template-rows:subgrid; grid-row:span 7; background:#FFFFFF; padding:0 clamp(18px, 1.6vw, 28px) 28px; transition:transform .5s var(--ease), box-shadow .5s var(--ease); isolation:isolate; }
 .play::before { content:""; position:absolute; inset:0 0 auto; height:10px; z-index:-1; background:var(--kc); transition:height .6s var(--ease); }
-.play:hover { transform:translateY(-8px); box-shadow:0 24px 48px -24px rgba(31,42,85,.35); }
-.play:hover::before { height:28px; }
-.play h3 { padding-top:44px; font-size:clamp(22px, 1.8vw, 30px); font-stretch:104%; letter-spacing:-.02em; line-height:1.05; color:var(--blue); }
+.play { cursor:pointer; }
+.play h3 a { color:inherit; text-decoration:none; }
+.play h3 a::after { content:""; position:absolute; inset:0; z-index:1; }
+.play h3 a:focus-visible { outline:none; }
+.play:focus-within { outline:3px solid var(--primary); outline-offset:4px; }
+.play:hover, .play:focus-within { transform:translateY(-8px); box-shadow:0 24px 48px -24px rgba(31,42,85,.35); }
+.play:hover::before, .play:focus-within::before { height:28px; }
+.play h3 { padding-top:44px; font-size:clamp(22px, 1.8vw, 30px); font-stretch:104%; letter-spacing:-.02em; line-height:1.05; color:var(--primary); }
 .play .tag { display:flex; align-items:center; gap:10px; margin-top:12px; font-size:var(--fs-label); font-weight:700; color:var(--ink-2); }
 .play .tag .dot { width:10px; height:10px; }
 .play dl { display:contents; }
@@ -404,7 +408,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 /* =====================================================================
    04 · START
    ===================================================================== */
-.start { padding:var(--sec) 0 calc(var(--sec) * .8); background:var(--blue); position:relative; overflow:hidden; isolation:isolate; }
+.start { padding:var(--sec) 0 calc(var(--sec) * .8); background:var(--primary); position:relative; overflow:hidden; isolation:isolate; }
 .start-top { display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); column-gap:var(--gap); align-items:start; }
 .start-top > div:first-child { grid-column:1 / span 7; }
 .start .eyebrow { color:rgba(255,255,255,.72); margin-bottom:22px; } .start .eyebrow b { color:var(--k1); }
@@ -426,7 +430,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .tl .tick { position:absolute; top:94px; width:2px; height:22px; background:#FFFFFF; }
 .tl .lbl { position:absolute; top:136px; transform:translateX(-50%); font-size:var(--fs-label); font-weight:700; color:rgba(255,255,255,.75); white-space:nowrap; }
 .tl .lbl.first { transform:none; } .tl .lbl.last { transform:translateX(-100%); }
-.tl .key { position:absolute; top:93px; width:24px; height:24px; border-radius:50%; background:var(--kc); box-shadow:0 0 0 4px var(--blue);
+.tl .key { position:absolute; top:93px; width:24px; height:24px; border-radius:50%; background:var(--kc); box-shadow:0 0 0 4px var(--primary);
   left:calc((100% - 24px - (3 - var(--k)) * 44px) * (1 - var(--p)) + (64px + var(--k) * 44px) * var(--p)); }
 .ways { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); column-gap:var(--gap); }
 .way { padding-top:22px; border-top:1px solid var(--rule-dark); }
@@ -451,6 +455,35 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 .telar { position:absolute; left:0; right:0; bottom:clamp(24px, 3vw, 48px); height:var(--telar-h); }
 .telar canvas { display:block; width:100%; height:100%; }
 .has-telar > .wrap { position:relative; z-index:1; }
+
+
+/* ---------- Polish pass ---------- */
+/* One chapter marker style: number in the display face, label in the text face */
+.eyebrow { margin-bottom:20px; letter-spacing:.01em; }
+.eyebrow b { font-size:15px; letter-spacing:0; }
+.on-dark .eyebrow { color:rgba(255,255,255,.72); } .on-dark .eyebrow b { color:var(--k1); }
+.statement .eyebrow { margin-bottom:28px; }
+/* One title rhythm: title → lead is always the same distance; leads never leave a single word behind */
+.h2 { margin:0 0 24px; }
+.unlocks-head .h2, .deeper-head .h2, .team-head .h2, .plays-head .h2 { margin-bottom:0; }
+.lead, .lede, .statement-p, .point p, .u-situation, .u-possible, .mx-cell, .partner-points p, .way span, .note { text-wrap:pretty; }
+.h2, .panel h2, .start h2, .statement-text, .rf-unlock, .u-name, .mx-head h3, .play h3, .testimonial p { text-wrap:balance; }
+/* Display titles: optical tightening as they grow */
+.h2 { letter-spacing:-.032em; }
+.panel h2 { letter-spacing:-.042em; }
+/* Hanging opening quotes, so quoted lines align with the text above them */
+.panel .quote, .mx-cell.pain { text-indent:-.4em; }
+/* Numbers line up */
+.u-name b, .mx-tag b, .play .latam, .play .us, .tl .lbl, .region-count { font-variant-numeric:tabular-nums; }
+/* Small labels a touch more legible */
+.label, .play dt { letter-spacing:.012em; }
+.person .role, .person .loc { letter-spacing:.005em; }
+/* Phone: the statement is the hero of its screen */
+@media (max-width:700px) {
+  .statement-text { font-size:clamp(46px, 13.4vw, 72px); }
+  .statement-pin { align-items:center; padding-bottom:var(--telar-h); }
+  .h2 { margin-bottom:18px; }
+}
 
 /* =====================================================================
    MOTION · reveals (only when the script runs; content is visible otherwise)
@@ -530,6 +563,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 <section id="reframe" class="statement" data-nav="reframe" aria-labelledby="reframe-title">
   <div class="statement-pin">
     <div class="wrap">
+      <p class="eyebrow"><b>01</b>The reframe</p>
       <h2 id="reframe-title" class="statement-text" data-words>We are an engine of new possibilities.</h2>
     </div>
     <div class="telar" data-tone="light" data-accent="k1,k2,k3,k4" data-mode="scroll" aria-hidden="true" data-motif="rombo"><canvas></canvas></div>
@@ -572,11 +606,11 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
   <div class="telar" data-tone="night" data-accent="k1,k2,k3,k4" aria-hidden="true" data-motif="rombo"><canvas></canvas></div>
   <div class="wrap">
     <div class="unlocks-head">
-      <div><h2 id="unlocks-title" class="h2 split-w" data-reveal="words">Expanding horizons: the art of the possible</h2></div>
+      <div><p class="eyebrow" data-reveal="fade"><b>02</b>The unlocks</p><h2 id="unlocks-title" class="h2 split-w" data-reveal="words">Expanding horizons: the art of the possible</h2></div>
       <p class="lead" data-reveal="rise">Because our cost structure is different, your options are different. Four moves now on the table:</p>
     </div>
     <div class="u-table">
-      <p class="u-labels label" aria-hidden="true"><span>The unlock</span><span>The situation you're in</span><span></span><span class="is-u">What LATAM CX makes possible</span></p>
+      <p class="u-labels label" aria-hidden="true"><span>The unlock</span><span>The situation you’re in</span><span></span><span class="is-u">What LATAM CX makes possible</span></p>
       <div class="u-row k1" data-reveal="rise">
         <p><a class="u-name" href="#open-door"><span class="dot" aria-hidden="true"></span><b>01</b>Open the door</a></p>
         <p class="u-situation">An account where Slalom has historically been priced out.</p>
@@ -591,7 +625,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
       </div>
       <div class="u-row k3" data-reveal="rise">
         <p><a class="u-name" href="#deeper-longer"><span class="dot" aria-hidden="true"></span><b>03</b>Go deeper</a></p>
-        <p class="u-situation">A live build that skipped research the client couldn't afford.</p>
+        <p class="u-situation">A live build that skipped research the client couldn’t afford.</p>
         <span class="u-link connector" aria-hidden="true" data-reveal="draw" style="--rd:.3s"></span>
         <p class="u-possible">Research added mid-flight, so the build lands on real needs.</p>
       </div>
@@ -612,15 +646,15 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
     <h2 id="open-door-title" class="split-w" data-reveal="words">Open the door</h2>
     <p class="lede" data-reveal="rise" style="--rd:.2s">Win where Slalom has been priced out.</p>
     <p class="ask">Ask your team</p>
-    <p class="quote" data-reveal="rise">“Which three accounts did you walk away from on price last year? Let's talk about those.”</p>
+    <p class="quote" data-reveal="rise">“Which three accounts did you walk away from on price last year? Let’s talk about those.”</p>
   </div>
   <div class="content">
     <p class="eyebrow"><b>02</b>The unlock and the keys</p>
     <p class="statement-p" data-reveal="rise">Slalom is a premium option, so some clients and briefs never make our list. LATAM CX changes the math: an experience-strategy engagement priced to win, delivered to Slalom standards, designed to grow.</p>
     <div class="points">
       <div class="point" data-reveal="rise"><h3>Land and expand</h3><p>Land with CX, expand with the whole firm: design opens conversations that technology and business teams can follow.</p></div>
-      <div class="point" data-reveal="rise" style="--rd:.08s"><h3>Who it's for</h3><p>Mid-market and regional brands that never made the shortlist; prospects who said “love the team, can't afford the rate.”</p></div>
-      <div class="point" data-reveal="rise" style="--rd:.16s"><h3>What we're not doing</h3><p>Lowering the bar to win. We bring the same team the bar was built for.</p></div>
+      <div class="point" data-reveal="rise" style="--rd:.08s"><h3>Who it’s for</h3><p>Mid-market and regional brands that never made the shortlist; prospects who said “love the team, can’t afford the rate.”</p></div>
+      <div class="point" data-reveal="rise" style="--rd:.16s"><h3>What we’re not doing</h3><p>Lowering the bar to win. We bring the same team the bar was built for.</p></div>
     </div>
   </div>
 </section>
@@ -636,9 +670,9 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
   </div>
   <div class="content">
     <p class="eyebrow"><b>02</b>The unlock and the keys</p>
-    <p class="statement-p" data-reveal="rise">The best ideas in an account often die in the gap between “interesting” and “fundable.” We live in that gap. Fuzzy briefs and riskier concepts that US economics can't absorb, we can.</p>
+    <p class="statement-p" data-reveal="rise">The best ideas in an account often die in the gap between “interesting” and “fundable.” We live in that gap. Fuzzy briefs and riskier concepts that US economics can’t absorb, we can.</p>
     <div class="points">
-      <div class="point" data-reveal="rise"><h3>Existing clients</h3><p>Explore early hunches with accounts we already serve, before they become someone else's RFP.</p></div>
+      <div class="point" data-reveal="rise"><h3>Existing clients</h3><p>Explore early hunches with accounts we already serve, before they become someone else’s RFP.</p></div>
       <div class="point" data-reveal="rise" style="--rd:.08s"><h3>New clients</h3><p>Pilot a concept or prove a direction without betting the annual budget.</p></div>
       <div class="point" data-reveal="rise" style="--rd:.16s"><h3>What the budget buys</h3><p>Time to think. Ambiguous briefs need investigation, and our structure lets us invest in it.</p></div>
     </div>
@@ -657,13 +691,13 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
       <div class="mx-labels" aria-hidden="true"><span class="mx-blank"></span><span class="label">The pain</span><span class="label">The move</span><span class="label">The payoff</span></div>
       <article class="mx-col k3" data-reveal="rise">
         <header class="mx-head"><h3>Go deeper</h3><p class="mx-tag"><span class="dot" aria-hidden="true"></span>Unlock <b>03</b></p></header>
-        <p class="mx-cell pain"><span class="label">The pain</span>“We're building the tool, but we never did research. The client had no budget for it.”</p>
+        <p class="mx-cell pain"><span class="label">The pain</span>“We’re building the tool, but we never did research. The client had no budget for it.”</p>
         <p class="mx-cell"><span class="label">The move</span>Interviews, usability testing and synthesis dropped in mid-flight. Fast, bilingual, across North and South America.</p>
-        <p class="mx-cell payoff"><span class="label">The payoff</span>Confidence that what's being built is what's needed.</p>
+        <p class="mx-cell payoff"><span class="label">The payoff</span>Confidence that what’s being built is what’s needed.</p>
       </article>
       <article class="mx-col k4" data-reveal="rise" style="--rd:.12s">
         <header class="mx-head"><h3>Stay longer</h3><p class="mx-tag"><span class="dot" aria-hidden="true"></span>Unlock <b>04</b></p></header>
-        <p class="mx-cell pain"><span class="label">The pain</span>“The engagement ends at launch. Adoption, iteration and support are nobody's job.”</p>
+        <p class="mx-cell pain"><span class="label">The pain</span>“The engagement ends at launch. Adoption, iteration and support are nobody’s job.”</p>
         <p class="mx-cell"><span class="label">The move</span>The same team, for longer, on the same spend. Stay through launch, learn from real usage, keep improving.</p>
         <p class="mx-cell payoff"><span class="label">The payoff</span>Outcomes measured after launch, not just delivery on time.</p>
       </article>
@@ -676,16 +710,17 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
   <div class="telar" data-tone="blue" data-accent="k1,k2,k3,k4" aria-hidden="true" data-motif="greca"><canvas></canvas></div>
   <div class="wrap partner-grid">
     <div class="partner-copy">
+      <p class="eyebrow" data-reveal="fade"><b>03</b>Why us</p>
       <h2 id="partner-title" class="h2 split-w" data-reveal="words">A thought partner with skin in the game</h2>
-      <p class="lead" data-reveal="rise">More than a staffing option: a team that rolls up its sleeves and jams with you to shape what's next.</p>
+      <p class="lead" data-reveal="rise">More than a staffing option: a team that rolls up its sleeves and jams with you to shape what’s next.</p>
       <div class="partner-points">
         <p data-reveal="rise"><b>Depth on demand.</b> One point of contact on your project, a full bench of skills behind them.</p>
         <p data-reveal="rise" style="--rd:.08s"><b>Multidisciplinary by design.</b> People who move between research, strategy and craft, and keep learning new ways of working.</p>
-        <p data-reveal="rise" style="--rd:.16s"><b>The footprint.</b> Almost 20 across Mexico, Colombia and our partner network, within Slalom's 600+ global design and strategy community.</p>
+        <p data-reveal="rise" style="--rd:.16s"><b>The footprint.</b> Almost 20 across Mexico, Colombia and our partner network, within Slalom’s 600+ global design and strategy community.</p>
       </div>
     </div>
     <div class="hub" data-reveal="fade">
-      <svg viewBox="-150 0 1020 720" role="img" aria-label="One LATAM CX lead at the centre, backed by the full bench: research, strategy, service design, product design, prototyping and design systems"><circle class="ring" cx="360" cy="360" r="290"/><circle class="ring" cx="360" cy="360" r="190" stroke-dasharray="4 10"/><polygon class="net" points="360.0,70.0 611.1,215.0 611.1,505.0 360.0,650.0 108.9,505.0 108.9,215.0"/><line class="spoke" data-i="0" pathLength="1" style="--n:0" x1="360" y1="360" x2="360.0" y2="70.0"/><line class="spoke" data-i="1" pathLength="1" style="--n:1" x1="360" y1="360" x2="611.1" y2="215.0"/><line class="spoke" data-i="2" pathLength="1" style="--n:2" x1="360" y1="360" x2="611.1" y2="505.0"/><line class="spoke" data-i="3" pathLength="1" style="--n:3" x1="360" y1="360" x2="360.0" y2="650.0"/><line class="spoke" data-i="4" pathLength="1" style="--n:4" x1="360" y1="360" x2="108.9" y2="505.0"/><line class="spoke" data-i="5" pathLength="1" style="--n:5" x1="360" y1="360" x2="108.9" y2="215.0"/><circle class="core" cx="360" cy="360" r="122"/><text class="core-title" x="360" y="364">LATAM CX lead</text><text class="core-sub" x="360" y="398">+ the full bench</text><g class="node" data-i="0" style="--n:0"><circle cx="360.0" cy="70.0" r="10"/><text x="360.0" y="44.0" text-anchor="middle">Research</text></g><g class="node" data-i="1" style="--n:1"><circle cx="611.1" cy="215.0" r="10"/><text x="635.1" y="225.0" text-anchor="start">Strategy</text></g><g class="node" data-i="2" style="--n:2"><circle cx="611.1" cy="505.0" r="10"/><text x="635.1" y="515.0" text-anchor="start">Service design</text></g><g class="node" data-i="3" style="--n:3"><circle cx="360.0" cy="650.0" r="10"/><text x="360.0" y="698.0" text-anchor="middle">Product design</text></g><g class="node" data-i="4" style="--n:4"><circle cx="108.9" cy="505.0" r="10"/><text x="84.9" y="515.0" text-anchor="end">Prototyping</text></g><g class="node" data-i="5" style="--n:5"><circle cx="108.9" cy="215.0" r="10"/><text x="84.9" y="225.0" text-anchor="end">Design systems</text></g></svg>
+      <svg viewBox="-150 0 1020 720" role="img" aria-label="One LATAM CX lead at the centre, backed by the full bench: research, strategy, service design, product design, prototyping and design systems"><circle class="ring" cx="360" cy="360" r="290"/><circle class="ring" cx="360" cy="360" r="190" stroke-dasharray="4 10"/><polygon class="net" points="360.0,70.0 611.1,215.0 611.1,505.0 360.0,650.0 108.9,505.0 108.9,215.0"/><line class="spoke" data-i="0" pathLength="1" style="--n:0" x1="360" y1="360" x2="360.0" y2="70.0"/><line class="spoke" data-i="1" pathLength="1" style="--n:1" x1="360" y1="360" x2="611.1" y2="215.0"/><line class="spoke" data-i="2" pathLength="1" style="--n:2" x1="360" y1="360" x2="611.1" y2="505.0"/><line class="spoke" data-i="3" pathLength="1" style="--n:3" x1="360" y1="360" x2="360.0" y2="650.0"/><line class="spoke" data-i="4" pathLength="1" style="--n:4" x1="360" y1="360" x2="108.9" y2="505.0"/><line class="spoke" data-i="5" pathLength="1" style="--n:5" x1="360" y1="360" x2="108.9" y2="215.0"/><circle class="core" cx="360" cy="360" r="138"/><text class="core-title" x="360" y="362">LATAM CX lead</text><text class="core-sub" x="360" y="392">+ the full bench</text><g class="node" data-i="0" style="--n:0"><circle cx="360.0" cy="70.0" r="10"/><text x="360.0" y="44.0" text-anchor="middle">Research</text></g><g class="node" data-i="1" style="--n:1"><circle cx="611.1" cy="215.0" r="10"/><text x="635.1" y="225.0" text-anchor="start">Strategy</text></g><g class="node" data-i="2" style="--n:2"><circle cx="611.1" cy="505.0" r="10"/><text x="635.1" y="515.0" text-anchor="start">Service design</text></g><g class="node" data-i="3" style="--n:3"><circle cx="360.0" cy="650.0" r="10"/><text x="360.0" y="698.0" text-anchor="middle">Product design</text></g><g class="node" data-i="4" style="--n:4"><circle cx="108.9" cy="505.0" r="10"/><text x="84.9" y="515.0" text-anchor="end">Prototyping</text></g><g class="node" data-i="5" style="--n:5"><circle cx="108.9" cy="215.0" r="10"/><text x="84.9" y="225.0" text-anchor="end">Design systems</text></g></svg>
       <div class="hub-m"><p class="hub-m-core"><b>LATAM CX lead</b><span>+ the full bench</span></p><ul><li>Research</li><li>Strategy</li><li>Service design</li><li>Product design</li><li>Prototyping</li><li>Design systems</li></ul></div>
     </div>
   </div>
@@ -697,11 +732,11 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
   <div class="wrap">
     <div class="proof-head">
       <h2 id="proof-title" class="h2 split-w" data-reveal="words">Trusted with brands you know</h2>
-      <p class="lead" data-reveal="rise">Perception evolves with proof. Here's ours.</p>
+      <p class="lead" data-reveal="rise">Perception evolves with proof. Here’s ours.</p>
     </div>
     <div class="proof-grid">
       <div class="proof-logos">
-        <h3 class="label">Clients we've delivered for</h3>
+        <h3 class="label">Clients we’ve delivered for</h3>
         <ul class="logos">
           <li data-reveal="fade"><img style="--w:min(220px, 72%)" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzIgNDAiPjxkZWZzPjxzdHlsZT4uY2xzLTJ7ZmlsbDojMDAzM2ExO308L3N0eWxlPjwvZGVmcz48dGl0bGU+Ym9laW5nX2xvZ288L3RpdGxlPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTI3LDI0LjE2YTEzLjU0LDEzLjU0LDAsMCwwLTQuNzktMTdjMi4xNy0yLjIzLDQuNTItNC40NCw3LTYuNTVBNjEsNjEsMCwwLDAsMjEsNi40NiwxMy41NCwxMy41NCwwLDAsMCw0LjQ3LDI3LjI5Yy0yLjU5LDUuNjEtMywxMC4xMS0uNzYsMTEuNjMsMi40NSwxLjYzLDcuNzctMS4zMywxMS02LjE0LDAsMC00Ljk0LDQuNDUtNy42NSwzLjQzLTEuNjctLjYzLTEuNjctMy4xOS0uMy02Ljg1YTEzLjU0LDEzLjU0LDAsMCwwLDE3LjUyLTEuMjhsLjQ4LjljNS45LS40OCwyMy41MS0uOTUsMjMuNTEtLjk1QzQ4LjIzLDI3LjIsMzYuNTcsMjgsMjcsMjQuMTZaTTIuODIsMTguNDVBMTEuOTIsMTEuOTIsMCwwLDEsMTkuNjcsNy42MSw2NC45Miw2NC45MiwwLDAsMCw1LjI2LDI1LjY4LDExLjg2LDExLjg2LDAsMCwxLDIuODIsMTguNDVaTTE0LjczLDMwLjM2YTExLjg2LDExLjg2LDAsMCwxLTcuMzctMi41NWMyLjM2LTUuMzIsNy4xNi0xMi40NiwxMy43MS0xOS40NGExMS45MSwxMS45MSwwLDAsMSw0LjQzLDE1LjE1LDIxLjc2LDIxLjc2LDAsMCwxLTUuNjYtMy42OWwzLjU5LDYuNzRBMTEuODcsMTEuODcsMCwwLDEsMTQuNzMsMzAuMzZaIi8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjEwNy43NiAxNy4yMSAxMDkuOTYgMTQuMjggMTAyLjI4IDE0LjI4IDEwNC4xNyAxMS43NyAxMTEuODYgMTEuNzcgMTE0LjA3IDguODQgOTguNzMgOC44NCA4OC4xOCAyMi44NCAxMDMuNTIgMjIuODQgMTA1LjcyIDE5LjkxIDk4LjA0IDE5LjkxIDEwMC4wNyAxNy4yMSAxMDcuNzYgMTcuMjEgMTA3Ljc2IDE3LjIxIi8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjExOC40MSA4Ljg0IDEwNy44NiAyMi44NCAxMTUuNTIgMjIuODQgMTI2LjA2IDguODQgMTE4LjQxIDguODQgMTE4LjQxIDguODQiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMTQzLjkxIDguODQgMTM4LjU2IDE1Ljk0IDEzNi45MiA4Ljg0IDEzMC45NCA4Ljg0IDEyMC4zOSAyMi44NCAxMjUuNDUgMjIuODQgMTMwLjc1IDE1LjgxIDEzMi4zOCAyMi44NCAxMzguNDIgMjIuODQgMTQ4Ljk3IDguODQgMTQzLjkxIDguODQgMTQzLjkxIDguODQiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xNjguOTMsOC44NGgtMTIuM2E2LjQzLDYuNDMsMCwwLDAtNS4xNSwyLjU3bC02LjM1LDguNDNhMS44NSwxLjg1LDAsMCwwLS4zOCwxLjEzLDEuODgsMS44OCwwLDAsMCwxLjg3LDEuODhoMTIuM2E2LjQ0LDYuNDQsMCwwLDAsNS4xNi0yLjU3bDEuNTMtMmgxLjc4bDIuMjItM2gtOS40MmwtMywzLjk1YTEuNjcsMS42NywwLDAsMS0xLjM0LjY3aC0yLjE3YS40OS40OSwwLDAsMS0uNDktLjQ5LjQ2LjQ2LDAsMCwxLC4xLS4yOWw1LTYuN2ExLjY2LDEuNjYsMCwwLDEsMS4zNC0uNjdoMi4xN2EuNDkuNDksMCwwLDEsLjQ5LjQ5LjUxLjUxLDAsMCwxLS4xLjI5bC0uODIsMS4wOWg3LjY0bDEuMzUtMS44YTEuODcsMS44NywwLDAsMC0xLjUtM1oiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05Mi40NSwxMC43MmExLjg3LDEuODcsMCwwLDAtMS44Ny0xLjg3SDc4LjI4YTYuNDQsNi40NCwwLDAsMC01LjE2LDIuNTdsLTYuMzUsOC40M2ExLjg4LDEuODgsMCwwLDAsMS41LDNoMTIuM2E2LjQ0LDYuNDQsMCwwLDAsNS4xNi0yLjU3bDYuMzUtOC40M2ExLjg2LDEuODYsMCwwLDAsLjM3LTEuMTNaTTgzLjksMTIuNTVsLTUsNi42OWExLjY2LDEuNjYsMCwwLDEtMS4zNC42N0g3NS4zNWEuNDkuNDksMCwwLDEtLjM5LS43OGw1LTYuN2ExLjY5LDEuNjksMCwwLDEsMS4zNC0uNjdoMi4xN2EuNDkuNDksMCwwLDEsLjQ5LjQ5LjUxLjUxLDAsMCwxLS4xLjI5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTYzLjUyLDE2LjE4YTYuNDMsNi40MywwLDAsMCwzLjcyLTIuNDFsMS40Ni0xLjkzYTEuODcsMS44NywwLDAsMC0xLjUtM0g1MS42OGwtMTAuNTUsMTRINTcuMTlhNi40NCw2LjQ0LDAsMCwwLDUuMTYtMi41N2wxLjQ5LTJhMS40NywxLjQ3LDAsMCwwLC4zLS45LDEuNTEsMS41MSwwLDAsMC0uNjEtMS4yMVpNNTYuNDIsMThsLS45NSwxLjI2YTEuNjcsMS42NywwLDAsMS0xLjM0LjY3SDUxbDItMi43aDNhLjQ5LjQ5LDAsMCwxLC40OS40OS40Ny40NywwLDAsMS0uMS4yOVptNC4xLTUuNDQtLjgxLDEuMDdhMS42OCwxLjY4LDAsMCwxLTEuMzQuNjZINTUuMjRsMS44OS0yLjUxaDNhLjQ5LjQ5LDAsMCwxLC40OS40OS41MS41MSwwLDAsMS0uMS4yOVoiLz48L3N2Zz4=" alt="Boeing"></li>
           <li data-reveal="fade" style="--rd:.06s"><img class="tall" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgo8c3ZnCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgdmVyc2lvbj0iMS4wIgogICB3aWR0aD0iMTIwIgogICBoZWlnaHQ9IjEwMCIKICAgaWQ9InN2ZzI0MDMiCiAgIHhtbDpzcGFjZT0icHJlc2VydmUiPjxkZWZzCiAgICAgaWQ9ImRlZnMyNDA2IiAvPjxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMS4xOTgxODQ4LDAsMCwxLjE5ODE4NDgsLTI2LjQyMDg3NCwtMTEzNy4wMzM2KSIKICAgICBpZD0iZzI1MDMiPjxnCiAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgwLjUsMCwwLDAuNSwxMS4wMjUzNzMsNTIxLjIyMDQ3KSIKICAgICAgIGlkPSJnMzMwMCI+PHBhdGgKICAgICAgICAgZD0iTSAyOC42NzE4NzUsMTAyMi40MDI0IEwgMTA4LjA1MTc1LDk4MC40MDAzOCBDIDExMi43Njg1LDk4MC44NTQ1IDExNy4zMDQ3NSw5ODEuMTI3ODggMTIyLjAyMTUsOTgxLjEyNzg4IEMgMTc3LjM1ODc1LDk4MS4xMjc4OCAyMjIuMzUzNzUsOTUyLjgyMjI1IDIyMi4zNTM3NSw5MTguMTczNzUgQyAyMjIuMzUzNzUsODgzLjUxNSAxNzcuMzU4NzUsODU1LjQ4ODc1IDEyMi4wMjE1LDg1NS40ODg3NSBDIDY2Ljc3MjUsODU1LjQ4ODc1IDIyLjA1MDc1LDg4My41MTUgMjIuMDUwNzUsOTE4LjE3Mzc1IEMgMjIuMDUwNzUsOTQxLjc1Nzc1IDQyLjY0NjUsOTYyLjM0ODYyIDczLjEyNSw5NzIuOTYzODggTCAyOC42NzE4NzUsMTAyMi40MDI0IgogICAgICAgICBpZD0icGF0aDI0MTgiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNlZDFjMjQ7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiIC8+PHBhdGgKICAgICAgICAgZD0iTSA4Ny4wOTQ3NSw4ODkuNTk1IEwgNjcuNTkyNzUsODg5LjU5NSBMIDY4LjMxNTM3NSw4OTUuMTI3NSBMIDcwLjIxOTc1LDg5NS4xMjc1IEMgNzIuNTc4MTI1LDg5NS4xMjc1IDczLjM5ODUsODk1LjQgNzMuNjY3LDg5NS40IEMgNzQuMTIxMTI1LDg5NS42NzM3NSA3NC4xMjExMjUsODk1Ljk0NzUgNzQuMTIxMTI1LDg5Ni4yMTYyNSBMIDc0LjEyMTEyNSw4OTYuMjE2MjUgQyA3NC4xMjExMjUsODk2LjQ4ODc1IDc0LjEyMTEyNSw4OTcuNTc3NSA3My4xMjUsODk5LjY2MjUgQyA3Mi4zMDk2MjUsOTAwLjc1MjUgNzEuMjIwNzUsOTAyLjU2ODc1IDY5Ljk1MTEyNSw5MDQuOTI2MjUgQyA2OS45NTExMjUsOTA0LjkyNjI1IDY3LjA0NTg3NSw5MDkuNDYyNSA2NC44NjgxMjUsOTEyLjYzNjI1IEMgNjIuNzgzMjUsOTA4LjEgNTguMjQ3MTI1LDg5OC4zMDYyNSA1OC4yNDcxMjUsODk4LjMwNjI1IEwgNTguMjQ3MTI1LDg5OC4zMDYyNSBDIDU3Ljk3MzYyNSw4OTguMDMyNSA1Ny45NzM2MjUsODk3Ljc1ODc1IDU3Ljc5Myw4OTcuMDM2MjUgQyA1Ny41MTk1LDg5Ni4yMTYyNSA1Ny4yNTEsODk1Ljk0NzUgNTcuMjUxLDg5NS45NDc1IEMgNTcuMjUxLDg5NS42NzM3NSA1Ny4yNTEsODk1LjY3Mzc1IDU3LjI1MSw4OTUuNjczNzUgQyA1Ny4yNTEsODk1LjY3Mzc1IDU3LjI1MSw4OTUuNjczNzUgNTcuNTE5NSw4OTUuNjczNzUgQyA1Ny41MTk1LDg5NS40IDU4LjI0NzEyNSw4OTUuNCA2MC42OTgyNSw4OTUuMTI3NSBMIDYzLjA1NjYyNSw4OTUuMTI3NSBMIDYyLjIzNjM3NSw4ODkuNTk1IEwgMzguMTk4MjUsODg5LjU5NSBMIDM5LjE5NDM3NSw4OTQuODU4NzUgTCA0MC44MzAxMjUsODk1LjEyNzUgQyA0My4xODg1LDg5NS40IDQ0LjAwMzg3NSw4OTUuOTQ3NSA0NC4yNzczNzUsODk1Ljk0NzUgQyA0NC4yNzczNzUsODk1Ljk0NzUgNDQuODE5Mzc1LDg5Ni40ODg3NSA0Ni4wODg4NzUsODk5LjM5NSBDIDQ2LjA4ODg3NSw4OTkuMzk1IDU1Ljg4ODYyNSw5MTkuOTg1IDU2LjQzMDYyNSw5MjEuMDczNzUgQyA1Ni4xNjIxMjUsOTIyLjE2MjUgNTQuMzQ1NzUsOTM4LjAzNzEyIDU0LjM0NTc1LDkzOC4wMzcxMiBDIDU0LjA3MjI1LDkzOS44NTM1IDUzLjUzMDI1LDk0MS4yMTA4NyA1Mi43MTQ4NzUsOTQxLjQ4NDM4IEMgNTIuNDQxMzc1LDk0MS43NTc3NSA1MS40NDUzNzUsOTQyLjIxMTg3IDQ4LjcyMDc1LDk0Mi4yMTE4NyBMIDQ2LjM2MjI1LDk0Mi40ODUzNyBMIDQ3LjE3Nzc1LDk0Ny44MzY4NyBMIDc1LjQ4MzM3NSw5NDcuODM2ODcgTCA3NC4zOTQ1LDk0Mi40ODUzNyBMIDcyLjg1MTYyNSw5NDIuMjExODcgQyA2OS40MDQyNSw5NDIuMjExODcgNjguMDQyLDk0Mi4wMzEyNSA2Ny41OTI3NSw5NDEuNzU3NzUgQyA2Ny4zMTkzNzUsOTQxLjc1Nzc1IDY3LjA0NTg3NSw5NDEuMjEwODcgNjYuNzcyNSw5NDAuMzk1NSBDIDY2Ljc3MjUsOTQwLjEyNyA2Ni43NzI1LDkzOS41ODAxMiA2Ni43NzI1LDkzOC44NTI1IEMgNjYuNzcyNSw5MzguMzEwNSA2Ni43NzI1LDkzNy4yMjE2MyA2Ny4wNDU4NzUsOTM2LjEzMjc1IEMgNjcuMDQ1ODc1LDkzNi4xMzI3NSA2OC4zMTUzNzUsOTIzLjcwNjI1IDY4LjU4ODg3NSw5MjEuMzQ3NSBDIDY5LjEzMDg3NSw5MjAuNTMyNSA4Mi42NTEzNzUsODk5LjEyMTI1IDgyLjY1MTM3NSw4OTkuMTIxMjUgQyA4My45MjA4NzUsODk3LjAzNjI1IDg0LjczNjM3NSw4OTYuMjE2MjUgODUuMDA5NzUsODk1Ljk0NzUgQyA4NS4yNzgzNzUsODk1LjY3Mzc1IDg2LjA5ODYyNSw4OTUuNCA4Ny42MzY3NSw4OTUuMTI3NSBMIDg5LjgxNDUsODk0Ljg1ODc1IEwgODguNzI1NjI1LDg4OS41OTUgTCA4Ny4wOTQ3NSw4ODkuNTk1IgogICAgICAgICBpZD0icGF0aDI0MjAiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiIC8+PHBhdGgKICAgICAgICAgZD0iTSA5My43MTU4NzUsOTA3LjEwNSBMIDkzLjcxNTg3NSw5MDcuMTA1IEwgODcuNjM2NzUsOTA4LjM3Mzc1IEwgODAuMDE5NSw5MTAuMDA1IEwgODAuNzQ3MTI1LDkxNC43MjYyNSBMIDgyLjY1MTM3NSw5MTQuNzI2MjUgQyA4NC40NjI4NzUsOTE0LjcyNjI1IDg1LjI3ODM3NSw5MTQuNzI2MjUgODUuNTUxNzUsOTE0Ljk5NSBDIDg1LjU1MTc1LDkxNC45OTUgODUuODI1MjUsOTE1LjI2ODc1IDg1LjgyNTI1LDkxNS41NDI1IEwgODUuODI1MjUsOTE1LjgxIEMgODUuODI1MjUsOTE1LjgxIDg1LjgyNTI1LDkxNi4zNTc1IDg1LjgyNTI1LDkxNi42MzEyNSBMIDg0LjE4OTUsOTM5LjAzODEzIEwgODQuMTg5NSw5NDAuNjY5IEMgODQuMTg5NSw5NDEuMjEwODcgODQuMTg5NSw5NDEuNzU3NzUgODQuMTg5NSw5NDIuNDg1MzcgQyA4NS4wMDk3NSw5NDUuNjU5MTMgODYuODIxMjUsOTQ3LjI5IDg4LjE4MzYyNSw5NDguMTA1NSBDIDg5LjI3MjUsOTQ4LjU1OTYyIDkwLjU0Miw5NDguODMzIDkxLjYzMDg3NSw5NDguODMzIEMgOTUuODkzNSw5NDguODMzIDk5LjUyMTUsOTQ2LjIwMTEzIDEwMi43MDAyNSw5NDEuMjEwODcgQyAxMDMuMjQyMjUsOTQwLjM5NTUgMTA0LjA1NzYzLDkzOS4wMzgxMyAxMDQuODczLDkzNy43NjM2MyBDIDEwNC42MDQ1LDkzOC41ODQgMTA0LjYwNDUsOTM5LjMwNjYzIDEwNC42MDQ1LDk0MC4xMjcgTCAxMDQuNjA0NSw5NDAuMzk1NSBDIDEwNC42MDQ1LDk0MS4yMTA4NyAxMDQuODczLDk0Mi4yMTE4NyAxMDQuODczLDk0My4wMjczOCBDIDEwNS4xNDY1LDk0NC45MzE2MyAxMDYuMTQ3NSw5NDYuNDc0NjIgMTA3LjIzMTUsOTQ3LjI5IEMgMTA4LjU5Mzc1LDk0OC4zNzg4NyAxMTAuMTM2NzUsOTQ4LjgzMyAxMTEuNzY3NjMsOTQ4LjgzMyBDIDExNC42NzI4Nyw5NDguODMzIDExNy41NzMyNSw5NDcuMDE2NjIgMTE5LjkzMTYyLDk0My4zMDA3NSBDIDEyMS4yOTQsOTQxLjc1Nzc1IDEyMi4yOTQ4Nyw5MzkuODUzNSAxMjMuMTEwMzcsOTM3Ljc2MzYzIEwgMTIzLjkyNTc1LDkzNi4xMzI3NSBMIDExOS4zODk2Myw5MzMuMjMyMzggTCAxMTYuNDg5MjUsOTM3Ljc2MzYzIEMgMTE1LjY2OSw5MzguODUyNSAxMTUuNDAwMzcsOTM5LjMwNjYzIDExNS40MDAzNyw5MzkuMzA2NjMgTCAxMTUuMjE0ODcsOTM5LjU4MDEyIEMgMTE1LjIxNDg3LDkzOS4wMzgxMyAxMTUuMjE0ODcsOTM4Ljg1MjUgMTE1LjIxNDg3LDkzOC44NTI1IEwgMTE3Ljg0NjYyLDkxMC4yNzg3NSBMIDExOC4xMjAxMyw5MDcuODMyNSBMIDEwOC4wNTE3NSw5MDcuODMyNSBMIDEwNy41MDQ4Nyw5MDkuNzM2MjUgQyAxMDYuNjg5NSw5MTQuMTggMTA2LjE0NzUsOTE3LjM1Mzc1IDEwNS42OTMzOCw5MTkuNTMxMjUgQyAxMDQuODczLDkyMi43MDUgMTA0LjA1NzYzLDkyNS42MSAxMDIuNzAwMjUsOTI4LjI0MjEyIEMgMTAxLjQyNTc1LDkzMS4xNDI2MiA5OS43OTQ4NzUsOTM0LjA0Nzg3IDk4LjI1Miw5MzYuNjc5NjIgQyA5Ni4xNjcsOTM5Ljg1MzUgOTQuODA0NzUsOTQwLjEyNyA5NC41MzEyNSw5NDAuMTI3IEwgOTQuNTMxMjUsOTM5Ljg1MzUgTCA5NC41MzEyNSw5MzkuODUzNSBMIDk0LjUzMTI1LDkzOS44NTM1IEwgOTQuNTMxMjUsOTM5LjMwNjYzIEwgOTQuNTMxMjUsOTM4LjAzNzEyIEwgOTYuODk0NSw5MTAuMjc4NzUgTCA5Ni44OTQ1LDkwOS43MzYyNSBDIDk2Ljg5NDUsOTA4LjkyMTI1IDk2LjYyMTEyNSw5MDguMzczNzUgOTYuMTY3LDkwNy44MzI1IEwgOTYuMTY3LDkwNy44MzI1IEMgOTUuMDc4MTI1LDkwNi44MzEyNSA5NC4yNjI3NSw5MDcuMTA1IDkzLjcxNTg3NSw5MDcuMTA1IgogICAgICAgICBpZD0icGF0aDI0MjIiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiIC8+PHBhdGgKICAgICAgICAgZD0iTSAxMzcuNDQxMjUsOTA3LjEwNSBDIDEzMS44MTYyNSw5MDguMzczNzUgMTI3LjY0NjI1LDkwOS40NjI1IDEyNC45MjE4OCw5MDkuNzM2MjUgTCAxMjIuODM2ODcsOTEwLjI3ODc1IEwgMTIzLjY1MjM3LDkxNS4yNjg3NSBMIDEyNS40Njg3NSw5MTUuMjY4NzUgQyAxMjcuOTE1LDkxNS4yNjg3NSAxMjguNjQyNSw5MTUuMjY4NzUgMTI4LjkxNjI1LDkxNS41NDI1IEMgMTI4LjkxNjI1LDkxNS41NDI1IDEyOS4xODUsOTE1LjU0MjUgMTI5LjE4NSw5MTUuODEgTCAxMjkuMTg1LDkxNi4wODM3NSBDIDEyOS4xODUsOTE2LjM1NzUgMTI5LjE4NSw5MTYuODExMjUgMTI5LjE4NSw5MTYuODExMjUgTCAxMjYuMDExMjUsOTQ3LjgzNjg3IEwgMTM2LjM1MjUsOTQ3LjgzNjg3IEwgMTM2LjYyNjI1LDk0NS45MzI2MyBDIDEzNy40NDEyNSw5NDEuNDg0MzggMTM3Ljg5NSw5MzguMDM3MTIgMTM4LjE2ODc1LDkzNS42Nzg3NSBDIDEzOC45ODUsOTMxLjk1OCAxMzkuOCw5MjguNzg0MTMgMTQwLjgwMTI1LDkyNi42MDYyNSBDIDE0MS44OSw5MjQuMjQ3NSAxNDMuNTIsOTIxLjYxNjI1IDE0NS4zMzI1LDkxOC45ODg3NSBDIDE0Ny42OTUsOTE1LjgxIDE0OC43ODM3NSw5MTUuNTQyNSAxNDkuMzI2MjUsOTE1LjU0MjUgTCAxNDkuMzI2MjUsOTE1LjU0MjUgQyAxNDkuMzI2MjUsOTE1LjgxIDE0OS4zMjYyNSw5MTUuODEgMTQ5LjMyNjI1LDkxNi4wODM3NSBMIDE0OS4zMjYyNSw5MTYuMzU3NSBMIDE0OS4zMjYyNSw5MTYuODExMjUgQyAxNDkuMzI2MjUsOTE3LjA4NSAxNDYuNjkzNzUsOTQ3LjgzNjg3IDE0Ni42OTM3NSw5NDcuODM2ODcgTCAxNTYuOTQ4NzUsOTQ3LjgzNjg3IEwgMTU3LjIxNjI1LDk0NS45MzI2MyBDIDE1Ny43NjM3NSw5MzkuMzA2NjMgMTU4LjMwNjI1LDkzNS40MDUyNSAxNTguNTc4NzUsOTMzLjUwMSBDIDE1OC44NTI1LDkzMS42ODk1IDE1OS42Njc1LDkyOS4zMzEgMTYwLjY2Mzc1LDkyNi42MDYyNSBDIDE2MS43NTI1LDkyMy45OCAxNjMuMjk2MjUsOTIxLjM0NzUgMTY1LjIsOTE4Ljk4ODc1IEMgMTY2LjQ3LDkxNi44MTEyNSAxNjguMTA1LDkxNS44MSAxNjkuMTkzNzUsOTE1LjU0MjUgQyAxNjkuMTkzNzUsOTE1LjgxIDE2OS4xOTM3NSw5MTUuODEgMTY5LjE5Mzc1LDkxNS44MSBMIDE2OS4xOTM3NSw5MTYuODExMjUgTCAxNjcuMjksOTM5LjU4MDEyIEwgMTY3LjI5LDk0MS4yMTA4NyBDIDE2Ny4yOSw5NDEuNzU3NzUgMTY3LjI5LDk0Mi4yMTE4NyAxNjcuMjksOTQyLjc1Mzg3IEMgMTY3LjgzMjUsOTQ1LjIwNTEyIDE2OC45MjEyNSw5NDYuNzQ4IDE3MC4xOSw5NDcuODM2ODcgQyAxNzEuMjc4NzUsOTQ4LjM3ODg3IDE3Mi41NDg3NSw5NDguODMzIDE3My42Mzc1LDk0OC44MzMgQyAxNzYuMjcsOTQ4LjgzMyAxNzguNDQ3NSw5NDcuODM2ODcgMTgwLjUzMjUsOTQ1LjY1OTEzIEMgMTgyLjM0ODc1LDk0My44NDI3NSAxODQuMjUyNSw5NDEuNDg0MzggMTg1Ljc5NjI1LDkzOC41ODQgTCAxODYuMDY1LDkzOC4wMzcxMiBMIDE4Ni44ODUsOTM2LjQwNjI1IEwgMTgyLjE2MjUsOTMzLjIzMjM4IEwgMTc4Ljk4ODc1LDkzOC4wMzcxMiBMIDE3OC43MTYyNSw5MzguNTg0IEMgMTc4LjQ0NzUsOTM4Ljg1MjUgMTc4LjE3Mzc1LDkzOS4zMDY2MyAxNzcuOSw5MzkuNTgwMTIgQyAxNzcuOSw5MzkuNTgwMTIgMTc3LjksOTM5LjU4MDEyIDE3Ny45LDkzOS44NTM1IEMgMTc4LjE3Mzc1LDkzNy4yMjE2MyAxNzkuNzE2MjUsOTE5LjI1NzUgMTc5LjcxNjI1LDkxOS4yNTc1IEwgMTc5LjcxNjI1LDkxOC45ODg3NSBDIDE3OS43MTYyNSw5MTcuNjI3NSAxNzkuNzE2MjUsOTE2LjgxMTI1IDE3OS43MTYyNSw5MTYuMDgzNzUgQyAxNzkuNzE2MjUsOTE0Ljk5NSAxNzkuNzE2MjUsOTE0LjQ1MjUgMTc5LjcxNjI1LDkxNC4xOCBDIDE3OS4xNyw5MTEuODIxMjUgMTc4LjE3Mzc1LDkxMC4wMDUgMTc2LjU0MjUsOTA4LjY0NzUgQyAxNzUsOTA3LjU1ODc1IDE3My4zNjM3NSw5MDcuMTA1IDE3MS41NTI1LDkwNy4xMDUgQyAxNjcuODMyNSw5MDcuMTA1IDE2NC4zODUsOTA5LjQ2MjUgMTYwLjY2Mzc1LDkxNC40NTI1IEwgMTYwLjY2Mzc1LDkxNC40NTI1IEMgMTYwLjM5NSw5MTQuOTk1IDE2MC4xMjI1LDkxNS4yNjg3NSAxNTkuNjY3NSw5MTUuODEgQyAxNTkuNjY3NSw5MTUuMjY4NzUgMTU5LjY2NzUsOTE0LjcyNjI1IDE1OS42Njc1LDkxNC4xOCBDIDE1OS4xMjEyNSw5MTEuNTQ3NSAxNTcuNzYzNzUsOTA5LjQ2MjUgMTU1Ljk0NzUsOTA4LjM3Mzc1IEMgMTU0LjU5LDkwNy41NTg3NSAxNTMuMzE1LDkwNy4xMDUgMTUxLjY4NSw5MDcuMTA1IEMgMTQ4LjIzNzUsOTA3LjEwNSAxNDQuNzksOTA5LjE5IDE0MS4zNDI1LDkxMy45MDYyNSBMIDE0MS4zNDI1LDkxMy45MDYyNSBDIDE0MC44MDEyNSw5MTQuNzI2MjUgMTQwLjM0NjI1LDkxNS41NDI1IDEzOS44LDkxNi4zNTc1IEMgMTQwLjA3Mzc1LDkxMy4xODM3NSAxNDAuNjE1LDkwOC4zNzM3NSAxNDAuNjE1LDkwOC4zNzM3NSBMIDEzOC40NDI1LDkwNi44MzEyNSBMIDEzNy40NDEyNSw5MDcuMTA1IgogICAgICAgICBpZD0icGF0aDI0MjQiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiIC8+PHBhdGgKICAgICAgICAgZD0iTSAxOTQuMDQ3NSw4OTEuOTUyNSBMIDE5NC4wNDc1LDg5MS45NTI1IEMgMTkzLjIzMjUsODkzLjU4ODc1IDE5Mi45NTg3NSw4OTYuNDg4NzUgMTkyLjk1ODc1LDkwMC4yMSBMIDE5Mi45NTg3NSw5MDcuNTU4NzUgQyAxOTIuOTU4NzUsOTA4LjEgMTkyLjk1ODc1LDkxMC40NTg3NSAxOTIuNjksOTE4LjQ0MjUgTCAxOTIuNDE3NSw5MzIuNTA0ODcgTCAxOTQuMDQ3NSw5MzIuOTU5IEwgMTk3LjQ5NSw5MzMuNTAxIEwgMjAwLjQsOTIwLjI1ODc1IEMgMjAxLjM5NjI1LDkxNC43MjYyNSAyMDEuOTQzNzUsOTEyLjYzNjI1IDIwMi4yMTI1LDkxMS44MjEyNSBDIDIwNC4xMTYyNSw5MDQuNjUzNzUgMjA1LjExNzUsOTAwLjQ4Mzc1IDIwNS4zOTEyNSw4OTkuMTIxMjUgQyAyMDUuNjU4NzUsODk3LjMwNSAyMDUuNjU4NzUsODk1LjY3Mzc1IDIwNS4zOTEyNSw4OTQuMTMxMjUgQyAyMDUuMTE3NSw4OTIuNzY4NzUgMjA0LjM5LDg5MS40MTEyNSAyMDMuMzAxMjUsODkwLjE0MTI1IEMgMjAyLjIxMjUsODg5LjA1MjUgMjAwLjY2ODc1LDg4OC41MDYyNSAxOTkuMDM3NSw4ODguNTA2MjUgQyAxOTYuOTUzNzUsODg4LjUwNjI1IDE5NS4wNDg3NSw4ODkuNTk1IDE5NC4wNDc1LDg5MS45NTI1IHogTSAxODguOTcsOTM4LjAzNzEyIEwgMTg4Ljk3LDkzOC4wMzcxMiBDIDE4Ny45Njg3NSw5MzkuMzA2NjMgMTg3LjQyNjI1LDk0MC45NDIzNyAxODcuNyw5NDIuNDg1MzcgQyAxODguMjQyNSw5NDQuNjU4MjUgMTg4Ljk3LDk0Ni4yMDExMyAxOTAuNiw5NDcuMjkgQyAxOTEuODcsOTQ4LjM3ODg3IDE5My41MDYyNSw5NDguODMzIDE5NS4wNDg3NSw5NDguODMzIEMgMTk2Ljk1Mzc1LDk0OC44MzMgMTk4LjQ5NjI1LDk0OC4xMDU1IDE5OS41ODUsOTQ2Ljc0OCBDIDIwMC42Njg3NSw5NDUuMzg1NzUgMjAxLjIxNjI1LDk0My44NDI3NSAyMDAuNjY4NzUsOTQyLjAzMTI1IEMgMjAwLjQsOTQwLjEyNyAxOTkuNTg1LDkzOC44NTI1IDE5OC4wNDI1LDkzNy40OTUxMyBDIDE5Ni42OCw5MzYuNDA2MjUgMTk1LjA0ODc1LDkzNS44NTkzOCAxOTMuNTA2MjUsOTM1Ljg1OTM4IEMgMTkxLjE0NzUsOTM1Ljg1OTM4IDE4OS41MTEyNSw5MzYuOTQ4MjUgMTg4Ljk3LDkzOC4wMzcxMiIKICAgICAgICAgaWQ9InBhdGgyNDI2IgogICAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTpub25lIiAvPjwvZz48L2c+PC9zdmc+" alt="Yum! Brands"></li>
@@ -746,7 +781,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
       <div><h2 id="plays-title" class="h2 split-w" data-reveal="words">Pick your play</h2></div>
       <p class="lead" data-reveal="rise">Four ready-to-run engagement shapes. Durations and teams are starting points; we tailor with you before scoping.</p>
     </div>
-    <ul class="plays-grid"><li class="play k1" data-reveal="rise" style="--rd:0.00s"><h3>Door-Opener Discovery</h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 01 · Open the door</p>
+    <ul class="plays-grid"><li class="play k1" data-reveal="rise" style="--rd:0.00s"><h3><a href="#open-door">Door-Opener Discovery</a></h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 01 · Open the door</p>
         <dl>
           <div><dt>Best for</dt><dd>New or priced-out accounts</dd></div>
           <div><dt>Duration</dt><dd class="dur">[4–5 weeks]</dd></div>
@@ -754,7 +789,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
           <div><dt>Output</dt><dd>Opportunity map, experience vision, roadmap and phase 2 proposal</dd></div>
           <div class="rate"><dt>Blended rate efficiency</dt><dd><span class="latam">LATAM <b class="cost-value">XX</b></span><span class="us">US local <b class="cost-value">XX</b></span></dd></div>
         </dl></li>
-      <li class="play k2" data-reveal="rise" style="--rd:0.08s"><h3>Hunch Sprint</h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 02 · Take the bet</p>
+      <li class="play k2" data-reveal="rise" style="--rd:0.08s"><h3><a href="#take-bet">Hunch Sprint</a></h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 02 · Take the bet</p>
         <dl>
           <div><dt>Best for</dt><dd>Ambiguous briefs, early ideas</dd></div>
           <div><dt>Duration</dt><dd class="dur">[2–3 weeks]</dd></div>
@@ -762,7 +797,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
           <div><dt>Output</dt><dd>Validated direction, concept prototype, go/no-go call</dd></div>
           <div class="rate"><dt>Blended rate efficiency</dt><dd><span class="latam">LATAM <b class="cost-value">XX</b></span><span class="us">US local <b class="cost-value">XX</b></span></dd></div>
         </dl></li>
-      <li class="play k3" data-reveal="rise" style="--rd:0.16s"><h3>Research Add-On</h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 03 · Go deeper</p>
+      <li class="play k3" data-reveal="rise" style="--rd:0.16s"><h3><a href="#deeper-longer">Research Add-On</a></h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 03 · Go deeper</p>
         <dl>
           <div><dt>Best for</dt><dd>Live engagements missing research</dd></div>
           <div><dt>Duration</dt><dd class="dur">[3–4 weeks]</dd></div>
@@ -770,7 +805,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
           <div><dt>Output</dt><dd>Interviews, usability findings, synthesis, design implications</dd></div>
           <div class="rate"><dt>Blended rate efficiency</dt><dd><span class="latam">LATAM <b class="cost-value">XX</b></span><span class="us">US local <b class="cost-value">XX</b></span></dd></div>
         </dl></li>
-      <li class="play k4" data-reveal="rise" style="--rd:0.24s"><h3>Delivery Extension</h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 04 · Stay longer</p>
+      <li class="play k4" data-reveal="rise" style="--rd:0.24s"><h3><a href="#deeper-longer">Delivery Extension</a></h3><p class="tag"><span class="dot" aria-hidden="true"></span>Unlock 04 · Stay longer</p>
         <dl>
           <div><dt>Best for</dt><dd>Longer or post-launch support</dd></div>
           <div><dt>Duration</dt><dd class="dur">[Ongoing, from 3 months]</dd></div>
@@ -778,12 +813,12 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
           <div><dt>Output</dt><dd>Continuous design delivery, iteration, measurement</dd></div>
           <div class="rate"><dt>Blended rate efficiency</dt><dd><span class="latam">LATAM <b class="cost-value">XX</b></span><span class="us">US local <b class="cost-value">XX</b></span></dd></div>
         </dl></li></ul>
-    <p class="note" data-reveal="rise"><b>Every play includes</b> US-hours overlap, one LATAM CX lead as your single point of contact, and help with pricing, contracting and eligibility. Some clients, like US government, are out of scope; we'll tell you up front.</p>
+    <p class="note" data-reveal="rise"><b>Every play includes</b> US-hours overlap, one LATAM CX lead as your single point of contact, and help with pricing, contracting and eligibility. Some clients, like US government, are out of scope; we’ll tell you up front.</p>
   </div>
 </section>
 
 <section class="ticker" aria-label="We're doers. We make stuff. Let's make something you couldn't before.">
-  <div class="ticker-track" aria-hidden="true"><p>We're doers. We make stuff. Let's make something you couldn't before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We're doers. We make stuff. Let's make something you couldn't before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We're doers. We make stuff. Let's make something you couldn't before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We're doers. We make stuff. Let's make something you couldn't before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span></div>
+  <div class="ticker-track" aria-hidden="true"><p>We’re doers. We make stuff. Let’s make something you couldn’t before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We’re doers. We make stuff. Let’s make something you couldn’t before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We’re doers. We make stuff. Let’s make something you couldn’t before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span><p>We’re doers. We make stuff. Let’s make something you couldn’t before.</p><span class="ticker-keys"><span class="dot k1"></span><span class="dot k2"></span><span class="dot k3"></span><span class="dot k4"></span></span></div>
 </section>
 
 <!-- ============ START ============ -->
@@ -810,8 +845,8 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
       <div class="key k1" style="--k:0"></div><div class="key k2" style="--k:1"></div><div class="key k3" style="--k:2"></div><div class="key k4" style="--k:3"></div>
     </div>
     <div class="ways">
-      <div class="way" data-reveal="rise"><b>Got a brief?</b><span>Share the opportunity; we'll propose the play in 48 hours.</span></div>
-      <div class="way" data-reveal="rise" style="--rd:.08s"><b>Got a hunch about an account?</b><span>Tell us the account; we'll shape a door-opener with you.</span></div>
+      <div class="way" data-reveal="rise"><b>Got a brief?</b><span>Share the opportunity; we’ll propose the play in 48 hours.</span></div>
+      <div class="way" data-reveal="rise" style="--rd:.08s"><b>Got a hunch about an account?</b><span>Tell us the account; we’ll shape a door-opener with you.</span></div>
       <div class="way" data-reveal="rise" style="--rd:.16s"><b>Just curious?</b><span>Book 30 minutes with the team.</span></div>
     </div>
   </div>
@@ -1029,13 +1064,13 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
     light: { line:'rgba(0,47,175,.18)', inner:'rgba(0,47,175,.09)' },
     mist:  { line:'rgba(0,47,175,.17)', inner:'rgba(0,47,175,.085)' },
     night: { line:'rgba(255,255,255,.16)', inner:'rgba(255,255,255,.075)' },
-    blue:  { line:'rgba(255,255,255,.18)', inner:'rgba(255,255,255,.085)' }
+    blue:  { line:'rgba(255,255,255,.26)', inner:'rgba(255,255,255,.12)' }
   };
   const PERIOD = 30, R = 7, ROWS = 15;     // a diamond every 30 cells, a small one halfway
   function Telar(box) {
     const canvas = $('canvas', box), ctx = canvas.getContext('2d');
     const tone = TONES[box.dataset.tone] || TONES.light, accents = box.dataset.accent.split(',').map(k => KEYC[k]);
-    const scrollMode = motion;                                     // every band is woven by the scroll, both ways
+    const scrollMode = false;                                      // woven once on arrival, then a constant drift
     let W = 0, H = 0, s = 0, cols = 0, dpr = 1, shift = 0, t0 = 0, woven = reduce || !motion, raf = 0, prog = 0;
     function size() {
       dpr = Math.min(2, window.devicePixelRatio || 1); W = box.clientWidth; H = box.clientHeight; s = H / ROWS;
@@ -1049,17 +1084,17 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
         const d = Math.abs(x - 15) + Math.abs(r - R);
         if (d === 0) return 'c'; if (d === R) return 'l'; if (d === R - 3) return 'i';
         if (Math.min(x, 30 - x) + Math.abs(r - R) === 2) return 'i'; return null; } },
-      escalera: { period:24, cell(x, r) {                       // patron.svg: stepped summits
-        const h = Math.abs(x - 12), top = 2 + (h >> 1);
+      escalera: { period:18, cell(x, r) {                       // patron.svg: stepped summits, one step up per step across
+        const h = Math.abs(x - 9), top = 2 + Math.max(0, h - 1);
         if (r === top) return h === 0 ? 'c' : 'l';
-        if (r === top + 3) return 'i'; if (r === ROWS - 1) return 'i'; return null; } },
+        if (r === top + 3) return 'i'; return null; } },
       greca:    { period:16, cell(x, r) {                       // interlocking hooks
         const y = r - 3; if (y < 0 || y > 8) return null;
         const ch = GRECA[y][x]; return ch === 'x' ? 'l' : ch === 'c' ? 'c' : null; } },
-      zigzag:   { period:14, cell(x, r) {                       // left-column.png: a continuous stepped wave
-        const h = Math.abs(x - 7), y1 = 3 + h;
-        if (x === 7 && r === 5) return 'c';
-        if (r === y1) return 'l'; if (r === y1 + 3) return 'i'; return null; } }
+      zigzag:   { period:10, cell(x, r) {                       // left-column.png: a tight stepped wave, two threads
+        const h = Math.abs(x - 5), y1 = 3 + h;
+        if (x === 5 && r === 5) return 'c';
+        if (r === y1) return 'l'; if (r === y1 + 4) return 'i'; return null; } }
     };
     const motif = MOTIFS[box.dataset.motif] || MOTIFS.rombo, PER = motif.period;
     function cell(c, r) {
@@ -1078,8 +1113,7 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
         for (let r = 0; r < ROWS; r++) {
           const m = cell(gc, r); if (!m) continue;
           let a = 1;
-          if (scrollMode) { a = clamp((prog * 1.3 - ((x / W) * .9 + (2 - m.ring) * .07)) / .14); if (a <= 0) continue; }
-          else if (!woven) { const k = clamp((now - t0 - ((x / W) * 1100 + (2 - m.ring) * 180)) / 420); if (k < 1) busy = true; a = k; if (a <= 0) continue; }
+          if (!woven) { const k = clamp((now - t0 - ((x / W) * 1100 + (2 - m.ring) * 180)) / 420); if (k < 1) busy = true; a = k; if (a <= 0) continue; }
           ctx.globalAlpha = a;
           ctx.fillStyle = m.kind === 'center' ? accents[((m.idx % accents.length) + accents.length) % accents.length] : m.kind === 'line' ? tone.line : tone.inner;
           ctx.fillRect(x + gap / 2, r * s + gap / 2, s - gap, s - gap);
@@ -1087,20 +1121,22 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
       }
       ctx.globalAlpha = 1;
       if (!woven && !busy && t0) woven = true;
-      return busy;
+      return busy || (motion && visible);
     }
-    const loop = now => { raf = 0; if (draw(now)) raf = requestAnimationFrame(loop); };
+    // after the weave, the band drifts by itself: ~14px a second, only while on screen
+    let visible = false, last = 0;
+    const loop = now => { raf = 0; if (motion && last && woven) shift += (now - last) * .014; last = now; if (draw(now)) raf = requestAnimationFrame(loop); else last = 0; };
     const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
     size(); draw(performance.now());
     addEventListener('resize', () => { size(); kick(); });
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (box.clientWidth !== W || box.clientHeight !== H) { size(); kick(); } }).observe(box);
-    if (scrollMode) woven = false;
-    else if (motion && 'IntersectionObserver' in window && !woven) {
+    if (motion && 'IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); else last = 0; }).observe(box);
+    if (motion && 'IntersectionObserver' in window && !woven) {
       new IntersectionObserver(([e], io) => { if (e.isIntersecting) { t0 = performance.now(); kick(); io.disconnect(); } }, { threshold:.5 }).observe(box);
     } else woven = true;
     const api = {
-      scroll(vh) { if (!motion || box.dataset.mode === 'scroll') return; const r = box.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return; prog = clamp((vh - r.top) / (vh * .7)); shift = (vh - r.top) * .14; kick(); },
-      progress(p) { if (!scrollMode) return; prog = p; shift = p * s * 30; kick(); }
+      scroll() {},
+      progress() {}
     };
     box.telar = api;
     return api;
@@ -1140,11 +1176,6 @@ h1, h2, h3 { font-family:var(--display); font-weight:800; }
 
   /* ---------- Hub: pointing at a discipline lights its line to the lead ---------- */
   const hub = $('.hub');
-  if (hub) $$('.node', hub).forEach(node => {
-    const spoke = $(`.spoke[data-i="${node.dataset.i}"]`, hub);
-    node.addEventListener('pointerenter', () => { hub.dataset.hot = ''; spoke.classList.add('hot'); });
-    node.addEventListener('pointerleave', () => { delete hub.dataset.hot; spoke.classList.remove('hot'); });
-  });
 
   /* ---------- Ticker: runs only while on screen ---------- */
   const ticker = $('.ticker');
